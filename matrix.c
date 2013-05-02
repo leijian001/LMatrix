@@ -1,7 +1,7 @@
 #include "matrix.h"
-#include <stdio.h>
 
 #if 0
+#include <stdio.h>
 static void matrix_print(struct matrix *m)
 {
 	unsigned int i, j;
