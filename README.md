@@ -9,7 +9,7 @@ FEATURES:
 	* 矩阵的行(列)交换
 
 LICENSE:
-	LMatrix is freely available under a LGPL license.
+	LMatrix is freely available under a BSD license.
 
 Authors and interested persons:
 	* leijian001		<937431539@qq.com>
