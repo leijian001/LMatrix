@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "matrix.h"
 
 #if 0
@@ -125,7 +127,7 @@ int matrix_mul(struct matrix *mul, struct matrix *a, struct matrix *b)
 	{
 		mul->row = a->row;
 		mul->column = b->column;
-		
+
 		for(i=0; i<mul->row; i++)
 		{
 			for(j=0; j<mul->column; j++)
@@ -183,7 +185,7 @@ int matrix_inv(struct matrix *inv, struct matrix *a)
 
 		//无逆矩阵
 		if(max < 0.0001)
-		{	
+		{
 			return -1;
 		}
 
@@ -194,7 +196,7 @@ int matrix_inv(struct matrix *inv, struct matrix *a)
 		}
 		if(js[k] != k)
 		{
-			matrix_swap_column(inv, k, js[k]);	
+			matrix_swap_column(inv, k, js[k]);
 		}
 
 		MATRIX(inv, k, k) = 1 / MATRIX(inv, k, k);
@@ -244,6 +246,36 @@ int matrix_inv(struct matrix *inv, struct matrix *a)
 		}
 	}
 
-	return 0;	
+	return 0;
 }
 
+
+int matrix_constructor(struct matrix *m, unsigned int row, unsigned int column)
+{
+	if(NULL == m)
+	{
+		return -1;
+	}
+
+	m->row = row;
+	m->column = column;
+	m->matrix = malloc(row * column * sizeof(double));
+
+	return (m->matrix)? 0:-1;
+}
+
+void matrix_destructor(struct matrix *m)
+{
+	if(NULL == m)
+	{
+		return;
+	}
+
+	m->row = 0;
+	m->column = 0;
+
+	if(NULL != m->matrix)
+	{
+		free(m->matrix);
+	}
+}

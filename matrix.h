@@ -10,6 +10,9 @@ struct matrix
 
 #define MATRIX(m, i, j) (*((m)->matrix + (i)*(m)->column + (j)))
 
+int matrix_constructor(struct matrix *m, unsigned int row, unsigned int column);
+void matrix_destructor(struct matrix *m);
+
 void matrix_swap_row(struct matrix *m, unsigned int i, unsigned int j);
 void matrix_swap_column(struct matrix *m, unsigned int i, unsigned int j);
 
