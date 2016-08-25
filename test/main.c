@@ -23,33 +23,35 @@ float table[][4] =
 
 int main(int argc, char *argv[])
 {
-	matrix_t m, y, mul;
+	matrix_t *m, *y, *mul;
 
-	matrix_init(&m);
-	matrix_init(&y);
-	matrix_init(&mul);
+	m = matrix_new();
+	y = matrix_new();
+	mul = matrix_new();
 
-	matrix_reshape(&m, 4, 4);
+	matrix_reshape(m, 4, 4);
 
-	for(int i=0; i<m.row; i++)
+	for(int i=0; i<m->row; i++)
 	{
-		for(int j=0; j<m.col; j++)
+		for(int j=0; j<m->col; j++)
 		{
-			matrix_set(&m, i, j, table[i][j]);
+			matrix_set(m, i, j, table[i][j]);
 		}
 	}
 
-	matrix_inv(&y, &m);
+	matrix_inv(y, m);
 
 	printf("inv:\n");
-	matrix_print(&y);
+	matrix_print(y);
 
-	matrix_matmul(&mul, &m, &y);
+	matrix_matmul(mul, m, y);
 
 	printf("mul:\n");
-	matrix_print(&mul);
+	matrix_print(mul);
 
-	matrix_release(&m);
+	matrix_delete(m);
+	matrix_delete(y);
+	matrix_delete(mul);
 
 	return 0;
 }

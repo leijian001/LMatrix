@@ -7,6 +7,15 @@
 
 #define FABS(x)		mathop(fabs)(x)
 
+real_t matrix_get(matrix_t *m, unsigned int row, unsigned int col)
+{
+	return MATRIX(m, row, col);
+}
+
+void matrix_set(matrix_t *m, unsigned int row, unsigned int col, real_t x)
+{
+	MATRIX(m, row, col) = x;
+}
 
 void matrix_map(matrix_t *s, matrix_t *x, real_t (*f)(real_t))
 {
@@ -415,12 +424,36 @@ void matrix_release(matrix_t *m)
 	}
 }
 
-real_t matrix_get(matrix_t *m, unsigned int row, unsigned int col)
+matrix_t *matrix_new(void)
 {
-	return MATRIX(m, row, col);
+	matrix_t *m;
+
+	m = malloc(sizeof(matrix_t));
+	if (m != NULL)
+	{
+		matrix_init(m);
+	}
+
+	return m;
 }
 
-void matrix_set(matrix_t *m, unsigned int row, unsigned int col, real_t x)
+matrix_t *matrix_new_with_shape(unsigned int row, unsigned int col)
 {
-	MATRIX(m, row, col) = x;
+	matrix_t *m;
+
+	m = malloc(sizeof(matrix_t));
+	if (m != NULL)
+	{
+		matrix_init_with_shape(m, row, col);
+	}
+
+	return m;
+}
+
+void matrix_delete(matrix_t *m)
+{
+	LM_ASSERT(m != NULL);
+
+	matrix_release(m);
+	free(m);
 }

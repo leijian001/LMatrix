@@ -31,6 +31,9 @@ void matrix_init(matrix_t *m);
 void matrix_init_with_shape(matrix_t *m, unsigned int row, unsigned int col);
 int  matrix_reshape(matrix_t *m, unsigned int row, unsigned int col);
 void matrix_release(matrix_t *m);
+matrix_t *matrix_new(void);
+matrix_t *matrix_new_with_shape(unsigned int row, unsigned int col);
+void matrix_delete(matrix_t *m);
 
 void matrix_swap_row(matrix_t *m, unsigned int i, unsigned int j);
 void matrix_swap_col(matrix_t *m, unsigned int i, unsigned int j);
